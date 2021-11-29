@@ -14,17 +14,11 @@ test('test cart - items', () => {
   cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
   cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
   cart.add(new Movie(1010, 'Avengers', 1500, 2012, 'USA', 'Avengers Assemble', 'fantastic', '137 min/02:17'));
-  expect(cart.items).toBe(
+  expect(cart.items).toEqual(
     [
-      Book {
-        id: 1001, name: 'War and Piece', author: 'Leo Tolstoy', price: 2000, pages: 1225
-      },
-      MusicAlbum {
-        id: 1008, name: 'Meteora', author: 'Linkin Park', price: 900
-      },
-      Movie {
-        id: 1010, name: 'Avengers', price: 1500, year: 2012, country: 'USA', slogan: 'Avengers Assemble', style: 'fantastic', time: '137 min/02:17'
-      }
+      new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225),
+      new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900),
+      new Movie(1010, 'Avengers', 1500, 2012, 'USA', 'Avengers Assemble', 'fantastic', '137 min/02:17')
     ]);
 });
 
@@ -49,13 +43,17 @@ test('test cartDel', () => {
   cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
   cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
   cart.add(new Movie(1010, 'Avengers', 1500, 2012, 'USA', 'Avengers Assemble', 'fantastic', '137 min/02:17'));
-  expect(cart.cartDel(1008)).toBe(
+  expect(cart.cartDel(1008)).toEqual(
     [
-      Book {
-        id: 1001, name: 'War and Piece', author: 'Leo Tolstoy', price: 2000, pages: 1225
-      },
-      Movie {
-        id: 1010, name: 'Avengers', price: 1500, year: 2012, country: 'USA', slogan: 'Avengers Assemble', style: 'fantastic', time: '137 min/02:17'
-      }
+      new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225),
+      new Movie(1010, 'Avengers', 1500, 2012, 'USA', 'Avengers Assemble', 'fantastic', '137 min/02:17')
     ]);
+});
+
+test('test cartDel no-ID', () => {
+  let cart = new Cart();
+  cart.add(new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225));
+  cart.add(new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900));
+  cart.add(new Movie(1010, 'Avengers', 1500, 2012, 'USA', 'Avengers Assemble', 'fantastic', '137 min/02:17'));
+  expect(cart.cartDel(101)).toBe(false);
 });

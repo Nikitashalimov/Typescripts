@@ -12,28 +12,19 @@ export default class Cart {
     }
 
     allSum() {
-        let arrCart = this._items;
-        let sale = 0;
-        for (let i = 0; i < arrCart.length; i++) {
-            sale = sale + arrCart[i].price;
-        }
-        return sale;
+        return this._items.reduce((total, item) => total + item.price, 0);
     }
     allSumSale(discount: number) {
-        let arrCart = this._items;
-        let sale = 0;
-        for (let i = 0; i < arrCart.length; i++) {
-            sale = sale + arrCart[i].price;
-        }
-        return sale * (1 - discount / 100);
+        return (this._items.reduce((total, item) => total + item.price, 0)) * (1 - discount / 100);
     }
     cartDel(idNumber: number) {
         let arrCart = this._items;
-        for (let i = 0; i < arrCart.length; i++) {
-            if (arrCart[i].id === idNumber) {
-                this._items.splice(i, 1);
-                return this._items;
-            }
+        const index = arrCart.findIndex(item => item.id === idNumber);
+        if (index !== -1) {
+            arrCart.splice(index, 1);
+            return arrCart;
+        } else {
+            return false;
         }
     }
 }
